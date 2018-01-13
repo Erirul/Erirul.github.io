@@ -24,9 +24,11 @@ function update(){
     // draw our player
     ctx.fillStyle = "red";
     ctx.fillRect(player.x, player.y, player.width, player.height);
+    // run through the loop again
+    requestAnimationFrame(update);
 }
 
-
-
-//this should be drawing our player but it isn't!!!!
+window.addEventListener("load", function(){
+  update();
+});
 
