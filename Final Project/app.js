@@ -20,10 +20,13 @@ canvas.width = width;
 canvas.height = height;
  
 // draw a small red box, which will eventually become our player.
-ctx.fillStyle = "red";
-ctx.fillRect(player.x, player.y, player.width, player.height);
+function update(){
+    // draw our player
+    ctx.fillStyle = "red";
+    ctx.fillRect(player.x, player.y, player.width, player.height);
+}
 
 
 
-
+//this should be drawing our player but it isn't!!!!
 
