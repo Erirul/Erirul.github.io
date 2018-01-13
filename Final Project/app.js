@@ -1,43 +1,29 @@
-var myBackground;
-var myGameArea;
-var myGamePiece;
-var platform1;
-var platform2;
-var bottle;
+//because setInterval is old and lame
+(function() {
+    var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    window.requestAnimationFrame = requestAnimationFrame;
+})();
 
 
-function startGame() {
-  myGamePiece = new component(30, 30, "#", 10, 120, "image");
-  myBackground = new component(656, 270, "#", 0, 0, "Assets/background.png");
-  myGameArea.start();
-}
+var canvas = document.getElementById("canvas"),
+    ctx = canvas.getContext("2d"),
+    width = 500,
+    height = 200,
+    player = {
+      x : width/2,
+      y : height - 5,
+      width : 5,
+      height : 5
+    };
+ 
+canvas.width = width;
+canvas.height = height;
+ 
+// draw a small red box, which will eventually become our player.
+ctx.fillStyle = "red";
+ctx.fillRect(player.x, player.y, player.width, player.height);
 
-function move(dir) {
-    myGamePiece.image.src = "#";
-    if (dir == "up") {myGamePiece.speedY = -1; }
-    if (dir == "down") {myGamePiece.speedY = 1; }
-    if (dir == "left") {myGamePiece.speedX = -1; }
-    if (dir == "right") {myGamePiece.speedX = 1; }
-}
 
-function clearmove() {
-    myGamePiece.image.src = "#";
-    myGamePiece.speedX = 0; 
-    myGamePiece.speedY = 0; 
-}
-
-function addPlatform() {
-platform1.image.src = "Assets/Platform1.png";
-platform2.image.src = "Assets/Platform2.png";
-}
-
-function updateGameArea() {
-    myGameArea.clear();
-    myBackground.newPos(); 
-    myBackground.update();
-    myGamePiece.newPos(); 
-    myGamePiece.update();
-}
 
 
 
