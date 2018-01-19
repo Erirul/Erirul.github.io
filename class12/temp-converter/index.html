@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Temp Converter</title>
+		<link rel="stylesheet" href="css/styles.css">
+	</head>
+	<body>
+
+		<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+		<script src="js/app.js"></script>
+		<h2>Temperature Converter</h2>
+<p>Type a value in the Fahrenheit field to convert the value to Celcius:</p>
+
+<p>
+  <label>Fahrenheit</label>
+  <input id="inputFahrenheit" type="number" placeholder="Fahrenheit" oninput="temperatureConverter(this.value)" onchange="temperatureConverter(this.value)">
+</p>
+<p>Celcius: <span id="outputCelcius"></span></p>
+
+	</body>
+</html>

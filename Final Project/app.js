@@ -25,6 +25,22 @@ canvas.height = height;
  
 // draw a small red box, which will eventually become our player. Will eventually replace with a sprite. Maybe. 
 function update(){
+	// check keys
+   if (keys[38]) {
+       // up arrow
+   }
+   if (keys[39]) {
+       // right arrow
+       if (player.velX < player.speed) {                         
+           player.velX++;                  
+       }          
+   }          
+   if (keys[37]) {                 
+        // left arrow                  
+       if (player.velX > -player.speed) {
+           player.velX--;
+       }
+   }
     // draw our player
     ctx.fillStyle = "red";
     ctx.fillRect(player.x, player.y, player.width, player.height);
@@ -44,6 +60,7 @@ document.body.addEventListener("keydown", function(e) {
 document.body.addEventListener("keyup", function(e) {
     keys[e.keyCode] = false;
 });
+
 
 
 
