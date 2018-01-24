@@ -1,10 +1,9 @@
-//because setInterval is old and lame
+//because set interval is kinda lame
 (function() {
     var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
 })();
-
-//Canvas
+ //eventually replace player dot with sprite?
 var canvas = document.getElementById("canvas"),
     ctx = canvas.getContext("2d"),
     width = 500,
@@ -16,43 +15,63 @@ var canvas = document.getElementById("canvas"),
       height : 5,
       speed: 3,
       velX: 0,
-      velY: 0
+      velY: 0,
+      jumping: false
     },
-    keys = [];
+    keys = [],
+    friction = 0.8,
+    gravity = 0.2;
  
 canvas.width = width;
 canvas.height = height;
  
-// draw a small red box, which will eventually become our player. Will eventually replace with a sprite. Maybe. 
 function update(){
-	// check keys
-   if (keys[38]) {
-       // up arrow
-   }
-   if (keys[39]) {
-       // right arrow
-       if (player.velX < player.speed) {                         
-           player.velX++;                  
-       }          
-   }          
-   if (keys[37]) {                 
-        // left arrow                  
-       if (player.velX > -player.speed) {
-           player.velX--;
-       }
-   }
-    // draw our player
-    ctx.fillStyle = "red";
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-    // run through the loop again
-    requestAnimationFrame(update);
+  // check keys
+    if (keys[38] || keys[32]) {
+        // up arrow or space
+      if(!player.jumping){
+       player.jumping = true;
+       player.velY = -player.speed*2;
+      }
+    }
+    if (keys[39]) {
+        // right arrow
+        if (player.velX < player.speed) {             
+            player.velX++;         
+         }     
+    }     
+    if (keys[37]) {         
+        // left arrow         
+        if (player.velX > -player.speed) {
+            player.velX--;
+        }
+    }
+ 
+    player.velX *= friction;
+ 
+    player.velY += gravity;
+ 
+    player.x += player.velX;
+    player.y += player.velY;
+ 
+    if (player.x >= width-player.width) {
+        player.x = width-player.width;
+    } else if (player.x <= 0) {         
+        player.x = 0;     
+    }    
+  
+    if(player.y >= height-player.height){
+        player.y = height - player.height;
+        player.jumping = false;
+    }
+ 
+  ctx.clearRect(0,0,width,height);
+  ctx.fillStyle = "red";
+  ctx.fillRect(player.x, player.y, player.width, player.height);
+ 
+  requestAnimationFrame(update);
 }
-//this is important don't delete it you idiot 
-window.addEventListener("load", function(){
-  update();
-});
-
-//yay keyboard events!! #BestComments #BestCoder
+ 
 document.body.addEventListener("keydown", function(e) {
     keys[e.keyCode] = true;
 });
@@ -60,6 +79,11 @@ document.body.addEventListener("keydown", function(e) {
 document.body.addEventListener("keyup", function(e) {
     keys[e.keyCode] = false;
 });
+ //this is important! Move it shift it don't delete it
+window.addEventListener("load",function(){
+    update();
+}); 
+
 
 
 
