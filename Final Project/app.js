@@ -84,6 +84,30 @@ window.addEventListener("load",function(){
     update();
 }); 
 
+//from this point we begin the code to deal with and draw collisions 
+
+var boxes = []
+ 
+// dimensions
+boxes.push({
+    x: 0,
+    y: 0,
+    width: 10,
+    height: height
+});
+boxes.push({
+    x: 0,
+    y: height - 2,
+    width: width,
+    height: 50
+});
+boxes.push({
+    x: width - 10,
+    y: 0,
+    width: 50,
+    height: height
+});
+
 
 
 
