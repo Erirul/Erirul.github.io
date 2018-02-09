@@ -33,6 +33,12 @@ boxes.push({
 });
 boxes.push({
     x: 0,
+    y: height - 200,
+    width: width,
+    height: 2
+});
+boxes.push({
+    x: 0,
     y: height - 2,
     width: width,
     height: 50
